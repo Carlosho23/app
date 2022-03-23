@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 
 public class MainActivity extends Activity {
-
+    //seta propriedades
     ImageView imagem;
     TextView texto;
     Animation some;
@@ -26,23 +26,28 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         imagem = findViewById(R.id.seta);
         texto = findViewById(R.id.texto_inicio);
+        //Tela quando inicia seta o texto e
         texto.setText("Toque para Continuar!");
         imagem.setVisibility(View.INVISIBLE);
 
+        //Variaveis da animação
         aparece = new AlphaAnimation(0,1);
         some = new AlphaAnimation(1,0);
 
+        //Duração da animação
         some.setDuration(500);
         aparece.setDuration(500);
 
         aparece.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                //seta a imagem para visualizar no inicio da animação
                 imagem.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                //seta a imagem para visualização final a animação
                 imagem.setVisibility(View.VISIBLE);
 
             }
@@ -56,12 +61,15 @@ public class MainActivity extends Activity {
         some.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                //seta a imagem para visualização no inicio da animação
                 imagem.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                //seta a imagem para ficar invisivel no fim da animação
                 imagem.setVisibility(View.INVISIBLE);
+                //seta o texto para como no começo da aplicação
                 texto.setText("Toque para Continuar!");
             }
 
@@ -72,20 +80,20 @@ public class MainActivity extends Activity {
         });
 
     }
-
+    //funcao de quando clicar na tela
     public void clicouTela(View view) {
-
-
+        //if gerando aleatoriamente se for menor que 0.5 seta o texto para esquerda e a seta para o lado da esquerda
         if (Math.random() < 0.5) {
             texto.setText("Siga para Esquerda");
             imagem.setScaleX(-1f);
+        //se não ele seta o texto para direita e a seta para direita
         } else {
             texto.setText("Siga para Direita");
             imagem.setScaleX(1f);
         }
 
         imagem.startAnimation(aparece);
-
+        //Timer para a duração que vai ficar a seta
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
